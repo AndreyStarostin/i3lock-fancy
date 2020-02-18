@@ -31,7 +31,7 @@ options="Options:
                      the list and exits immediately.
 
     -n, --nofork     Do not fork i3lock after starting.
-
+    
     --               Must be last option. Set command to use for taking a
                      screenshot. Default is 'import -window root'. Using 'scrot'
                      or 'maim' will increase script speed and allow setting
@@ -61,7 +61,7 @@ case "${LANG:-}" in
     pl_* ) text="Podaj hasło" ;; # Polish
     pt_* ) text="Digite a senha para desbloquear" ;; # Português
     tr_* ) text="Giriş yapmak için şifrenizi girin" ;; # Turkish
-    ru_* ) text="Введите пароль" ;; # Russian
+    ru_* ) text="Type password" ;; # Russian
     * ) text="Type password to unlock" ;; # Default to English
 esac
 
@@ -79,9 +79,9 @@ while true ; do
             esac ;;
         -t|--text) text=$2 ; shift 2 ;;
         -l|--listfonts)
-	    convert -list font | awk -F: '/Font: / { print $2 }' | sort -du | command -- ${PAGER:-less}
-	    exit 0 ;;
-	-n|--nofork) i3lock_cmd+=(--nofork) ; shift ;;
+            convert -list font | awk -F: '/Font: / { print $2 }' | sort -du | command -- ${PAGER:-less}
+            exit 0 ;;
+        -n|--nofork) i3lock_cmd+=(--nofork) ; shift ;;
         --) shift; shot_custom=true; break ;;
         *) echo "error" ; exit 1 ;;
     esac
@@ -101,21 +101,23 @@ color=$(convert "$image" -gravity center -crop 100x100+0+0 +repage -colorspace h
 if [[ $color -gt $value ]]; then #white background image and black text
     bw="black"
     icon="/usr/share/i3lock-fancy/icons/lockdark.png"
-    param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
-        "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
+    param=("--timepos=x+120:y+670" "--wrongpos=x+735:y+630" "--verifpos=x+735:y+630" "--clock" \
+        "--insidecolor=0000001c" "--ringcolor=0000003e" \
+        "--linecolor=0000001c" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff1c" \
         "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
         "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
-        "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
-        "--datecolor=ffffff00" "--layoutcolor=ffffff00")
+        "--verifcolor=000000ff" "--wrongcolor=000000ff" "--timecolor=000000ff" \
+        "--datecolor=000000ff" "--layoutcolor=ffffffff")
 else #black
     bw="white"
     icon="/usr/share/i3lock-fancy/icons/lock.png"
-    param=("--insidecolor=ffffff1c" "--ringcolor=ffffff3e" \
+    param=("--timepos=x+120:y+670" "--wrongpos=x+735:y+630" "--verifpos=x+735:y+630" "--clock" \
+        "--insidecolor=ffffff1c" "--ringcolor=ffffff3e" \
         "--linecolor=ffffff00" "--keyhlcolor=00000080" "--ringvercolor=00000000" \
         "--separatorcolor=22222260" "--insidevercolor=0000001c" \
         "--ringwrongcolor=00000055" "--insidewrongcolor=0000001c" \
-        "--verifcolor=00000000" "--wrongcolor=ff000000" "--timecolor=00000000" \
-        "--datecolor=00000000" "--layoutcolor=00000000")
+        "--verifcolor=ffffffff" "--wrongcolor=ffffffff" "--timecolor=ffffffff" \
+        "--datecolor=ffffffff" "--layoutcolor=00000000")
 fi
 
 convert "$image" "${hue[@]}" "${effect[@]}" -font "$font" -pointsize 26 -fill "$bw" -gravity center \
