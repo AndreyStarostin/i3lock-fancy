@@ -127,3 +127,6 @@ convert /path/to/background.png -font Liberation-Sans \
 ```
 i3lock -i newimage.png
 ```
+Autolock
+------------
+/usr/bin/xautolock -time 3 -locker "/usr/bin/i3lock-fancy -f Cantarell-Light"  -corners 0-00
