@@ -102,22 +102,22 @@ if [[ $color -gt $value ]]; then #white background image and black text
     bw="black"
     icon="/usr/share/i3lock-fancy/icons/lockdark.png"
     param=("--timepos=x+120:y+670" "--wrongpos=x+735:y+630" "--verifpos=x+735:y+630" "--clock" \
-        "--insidecolor=0000001c" "--ringcolor=0000003e" \
+        "--insidecolor=0000001c" "--keylayout=2" "--ringcolor=0000003e" \
         "--linecolor=0000001c" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff1c" \
         "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
         "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
         "--verifcolor=000000ff" "--wrongcolor=000000ff" "--timecolor=000000ff" \
-        "--datecolor=000000ff" "--layoutcolor=ffffffff")
+        "--datecolor=000000ff" "--layoutcolor=000000ff" "--pass-media-keys" "--pass-screen-keys")
 else #black
     bw="white"
     icon="/usr/share/i3lock-fancy/icons/lock.png"
     param=("--timepos=x+120:y+670" "--wrongpos=x+735:y+630" "--verifpos=x+735:y+630" "--clock" \
-        "--insidecolor=ffffff1c" "--ringcolor=ffffff3e" \
+        "--insidecolor=ffffff1c" "--keylayout=2" "--ringcolor=ffffff3e" \
         "--linecolor=ffffff00" "--keyhlcolor=00000080" "--ringvercolor=00000000" \
         "--separatorcolor=22222260" "--insidevercolor=0000001c" \
         "--ringwrongcolor=00000055" "--insidewrongcolor=0000001c" \
         "--verifcolor=ffffffff" "--wrongcolor=ffffffff" "--timecolor=ffffffff" \
-        "--datecolor=ffffffff" "--layoutcolor=00000000")
+        "--datecolor=ffffffff" "--layoutcolor=ffffffff" "--pass-media-keys" "--pass-screen-keys")
 fi
 
 convert "$image" "${hue[@]}" "${effect[@]}" -font "$font" -pointsize 26 -fill "$bw" -gravity center \
